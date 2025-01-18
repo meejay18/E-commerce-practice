@@ -1,9 +1,11 @@
 import { model, Schema, Document } from "mongoose";
 
 interface iUser {
-  name: string;
+  firstname: string;
+  lastname: string;
+  username: string;
   email: string;
-  passsword: string;
+  password: string;
   avatar: string;
   avatarID: string;
   verifiedToken: string;
@@ -16,13 +18,27 @@ interface iUserData extends iUser, Document {}
 
 const userModel = new Schema<iUserData>(
   {
-    name: {
+    firstname: {
+      type: String,
+    },
+    lastname: {
+      type: String,
+    },
+    username: {
+      type: String,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    verifiedToken: {
       type: String,
     },
     email: {
       type: String,
+      unique: true,
     },
-    passsword: {
+    password: {
       type: String,
     },
     avatar: {
